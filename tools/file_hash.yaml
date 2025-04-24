@@ -1,6 +1,6 @@
 identity:
   name: file_hash
-  author: hanw
+  author: hanw39
   label:
     en_US: File Hash
     zh_Hans: 文件哈希

@@ -1,6 +1,6 @@
 # File Operation Toolkit
 
-**Author:** hanw
+**Author:** hanw39
 **Version:** 0.0.1
 **Type:** plugin
 
