@@ -1,8 +1,9 @@
 # File Operation Toolkit
 
-**Author:** hanw39
-**Version:** 0.0.1
-**Type:** plugin
+**Author:** hanw39\
+**Version:** 0.0.1\
+**Type:** plugin\
+**Github** https://github.com/hanw39/file_operation
 
 ## Project Overview
 
