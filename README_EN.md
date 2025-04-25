@@ -45,8 +45,17 @@ Calculates file hash digests, supporting multiple algorithms and formats.
 
 #### Usage
 ![img.png](img.png)
-![img_1.png](img_1.png)
- Response parameter example
+![img_3.png](img_3.png)
+![img_2.png](img_2.png)
+
+#### Return Results
+The tool returns a JSON object containing the following information:
+- Success/failure status
+- Basic file information (name, size, etc.)
+- Selected algorithm and its security rating
+- Generated hash value (in specified format)
+- Processing time (milliseconds)
+- Verification results (if expected hash value is provided)
 ```json
   {
   "text": "",
@@ -54,7 +63,7 @@ Calculates file hash digests, supporting multiple algorithms and formats.
   "json": [
     {
       "code": 0,
-      "message": "Downloading file pre-sales-proposal-review-form-24121.xlsx...",
+      "message": "Downloading file pre-sales-proposal-review-form-241216.xlsx...",
       "progress": 0,
       "status": "processing"
     },
@@ -62,7 +71,7 @@ Calculates file hash digests, supporting multiple algorithms and formats.
       "code": 0,
       "data": {
         "file": {
-          "name": "pre-sales-proposal-review-form-24121.xlsx",
+          "name": "pre-sales-proposal-review-form-241216.xlsx",
           "size": {
             "bytes": 3469575,
             "readable": "3.31 MB"
@@ -91,21 +100,6 @@ Calculates file hash digests, supporting multiple algorithms and formats.
   ]
 }
 ```
-![img_2.png](img_2.png)
-1. Upload files to process or provide file URLs
-2. Select hash algorithm (default is SHA-256)
-3. Select output format (default is hexadecimal)
-4. Optional: Enter expected hash value for verification
-
-#### Return Results
-
-The tool returns a JSON object containing the following information:
-- Success/failure status
-- Basic file information (name, size, etc.)
-- Selected algorithm and its security rating
-- Generated hash value (in specified format)
-- Processing time (milliseconds)
-- Verification results (if expected hash value is provided)
 
 #### Batch Processing
 
