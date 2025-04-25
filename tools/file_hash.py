@@ -242,6 +242,24 @@ class FileHashTool(Tool):
             元组(文件内容, 是否成功, 错误信息)
         """
         try:
+            # 处理不包含http前缀的URL
+            if url and not url.startswith(('http://', 'https://')):
+                # 从环境变量获取FILES_URL作为基础URL
+                base_url = os.environ.get('FILES_URL')
+                if not base_url:
+                    return None, False, "未配置FILES_URL环境变量，无法处理相对URL。请在环境变量中设置FILES_URL指向Dify文件服务地址。"
+                
+                # 确保基础URL没有尾部斜杠
+                if base_url.endswith('/'):
+                    base_url = base_url[:-1]
+                
+                # 确保URL路径以/开头
+                if not url.startswith('/'):
+                    url = '/' + url
+                
+                url = f"{base_url}{url}"
+                print(f"转换相对URL为绝对URL: {url}")
+            
             response = requests.get(url, stream=True, timeout=60)
             if response.status_code != 200:
                 return None, False, f"下载失败，HTTP状态码: {response.status_code}"
