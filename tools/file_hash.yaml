@@ -37,7 +37,7 @@ parameters:
       zh_Hans: 要使用的哈希算法
       pt_BR: Algoritmo de hash a ser usado
     llm_description: Hash algorithm to use
-    form: form
+    form: llm
     default: SHA-256
     options:
       - value: MD2
@@ -92,7 +92,7 @@ parameters:
       zh_Hans: 哈希值的输出格式
       pt_BR: Formato da saída do hash
     llm_description: Format of the hash output
-    form: form
+    form: llm
     default: hex
     options:
       - value: hex
@@ -122,7 +122,7 @@ parameters:
       zh_Hans: 用于验证的预期哈希值（可选）
       pt_BR: Valor de hash esperado para verificação (opcional)
     llm_description: Expected hash value for verification (optional)
-    form: form
+    form: llm
 extra:
   python:
     source: tools/file_hash.py
