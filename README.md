@@ -1,61 +1,62 @@
-# 文件操作工具集
+# File Operation Toolkit
 
-**作者:** hanw39\
-**版本:** 0.0.1\
-**类型:** plugin\
+**Author:** hanw39\
+**Version:** 0.0.1\
+**Type:** plugin\
 **Github** https://github.com/hanw39/file_operation
-## 项目概述
 
-这是一个模块化的文件操作工具集合，提供各种文件处理功能。项目采用可扩展架构设计，允许轻松添加新的文件操作工具。当前实现了文件哈希计算功能，后续将陆续添加更多文件操作工具。
+## Project Overview
 
-## 架构设计
+This is a modular file operation toolkit providing various file processing functions. The project adopts an extensible architecture design, allowing for easy addition of new file operation tools. Currently, file hash calculation functionality is implemented, with more file operation tools to be added in the future.
 
-项目采用分层架构：
+## Architecture Design
 
-- **Provider层**：作为所有文件操作工具的统一入口，处理认证和通用功能
-- **Tool层**：实现具体的文件操作功能，每个工具独立维护和开发
+The project adopts a layered architecture:
 
-## 当前工具
+- **Provider Layer**: Serves as the unified entry point for all file operation tools, handling authentication and common functionalities
+- **Tool Layer**: Implements specific file operation functions, with each tool maintained and developed independently
 
-### 文件哈希工具
+## Current Tools
 
-计算文件的哈希摘要，支持多种算法和格式。
+### File Hash Tool
 
-#### 功能特点
+Calculates file hash digests, supporting multiple algorithms and formats.
 
-- **多种哈希算法支持**
-  - 传统算法：MD2、MD5、SHA-1
-  - 现代标准算法：SHA-256、SHA-384、SHA-512
-  - 高级现代算法：SHA3-256、BLAKE2b
-- **多种输出格式**
-  - 十六进制（默认）
-  - Base64编码
-  - 二进制表示
-- **高级功能**
-  - 支持从URL下载文件并计算哈希
-  - 支持多文件批量处理
-  - 大文件分块处理，带进度报告
-  - 哈希值验证（通过预期哈希值比较）
-  - 算法安全性评级
-  - 详细的性能统计
-- **用户友好**
-  - 直观的界面设计
-  - 详细的结果输出
-  - 智能错误处理
+#### Features
 
-#### 使用方法
+- **Multiple Hash Algorithm Support**
+  - Traditional algorithms: MD2, MD5, SHA-1
+  - Modern standard algorithms: SHA-256, SHA-384, SHA-512
+  - Advanced modern algorithms: SHA3-256, BLAKE2b
+- **Multiple Output Formats**
+  - Hexadecimal (default)
+  - Base64 encoding
+  - Binary representation
+- **Advanced Features**
+  - Support for downloading files from URLs and calculating hashes
+  - Support for batch processing of multiple files
+  - Large file chunk processing with progress reporting
+  - Hash value verification (by comparing with expected hash values)
+  - Algorithm security rating
+  - Detailed performance statistics
+- **User-Friendly**
+  - Intuitive interface design
+  - Detailed result output
+  - Intelligent error handling
+
+#### Usage
 ![img.png](img.png)
 ![img_3.png](img_3.png)
 ![img_2.png](img_2.png)
 
-#### 返回结果
-工具返回一个包含以下信息的JSON对象：
-- 成功/失败状态
-- 文件基本信息（名称、大小等）
-- 所选算法及其安全性评级
-- 生成的哈希值（按指定格式）
-- 处理时间（毫秒）
-- 验证结果（如有预期哈希值）
+#### Return Results
+The tool returns a JSON object containing the following information:
+- Success/failure status
+- Basic file information (name, size, etc.)
+- Selected algorithm and its security rating
+- Generated hash value (in specified format)
+- Processing time (milliseconds)
+- Verification results (if expected hash value is provided)
 ```json
   {
   "text": "",
@@ -63,7 +64,7 @@
   "json": [
     {
       "code": 0,
-      "message": "正在下载文件 售前方案自助评审表-出口信保电档241216.xlsx...",
+      "message": "Downloading file pre-sales-proposal-review-form-241216.xlsx...",
       "progress": 0,
       "status": "processing"
     },
@@ -71,7 +72,7 @@
       "code": 0,
       "data": {
         "file": {
-          "name": "售前方案自助评审表-出口信保电档241216.xlsx",
+          "name": "pre-sales-proposal-review-form-241216.xlsx",
           "size": {
             "bytes": 3469575,
             "readable": "3.31 MB"
@@ -81,8 +82,8 @@
           "algorithm": "MD5",
           "format": "base64",
           "security": {
-            "description": "已被破解，仅用于完整性检查",
-            "rating": "不安全"
+            "description": "Broken, only for integrity checks",
+            "rating": "Insecure"
           },
           "value": "mvWXxH2wZMeeLPZ28EZHFA=="
         },
@@ -91,49 +92,49 @@
         "verification": {
           "actual": "mvWXxH2wZMeeLPZ28EZHFA==",
           "expected": "111",
-          "status": "不匹配",
+          "status": "Not matching",
           "verified": false
         }
       },
-      "message": "哈希计算完成，验证结果: 不匹配"
+      "message": "Hash calculation completed, verification result: Not matching"
     }
   ]
 }
 ```
 
-#### 批量处理
+#### Batch Processing
 
-支持同时处理多个文件，返回聚合结果：
-- 总文件数
-- 成功/失败数量
-- 每个文件的详细结果
+Supports processing multiple files simultaneously, returning aggregated results:
+- Total number of files
+- Number of successful/failed operations
+- Detailed results for each file
 
-## 计划中的工具
+## Planned Tools
 
-项目将陆续添加更多文件操作工具，包括但不限于：
+The project will gradually add more file operation tools, including but not limited to:
 
-- 文件格式转换
-- 图像处理
-- 文档内容提取
-- 文件压缩/解压
-- 文件元数据提取
+- File format conversion
+- Image processing
+- Document content extraction
+- File compression/decompression
+- File metadata extraction
 
-## 技术实现
+## Technical Implementation
 
-- 对大文件使用分块处理算法，避免内存溢出
-- 使用Python标准库hashlib实现大部分哈希算法
-- 使用pycryptodome库实现MD2算法
-- 使用requests库处理URL下载
-- 提供实时进度报告功能
-- 详细的错误处理和诊断信息
+- Uses chunk processing algorithms for large files to avoid memory overflow
+- Uses Python standard library hashlib to implement most hash algorithms
+- Uses pycryptodome library to implement MD2 algorithm
+- Uses requests library for URL downloads
+- Provides real-time progress reporting
+- Detailed error handling and diagnostic information
 
-## 开发与扩展
+## Development and Extension
 
-要添加新的文件操作工具：
+To add new file operation tools:
 
-1. 在`tools/`目录下创建新的工具实现和定义文件
-2. 在`provider/file_operation.yaml`中添加对新工具的引用
-3. 实现工具的具体逻辑，保持与现有架构的一致性
+1. Create new tool implementation and definition files in the `tools/` directory
+2. Add references to new tools in `provider/file_operation.yaml`
+3. Implement specific tool logic, maintaining consistency with the existing architecture
 
 
 

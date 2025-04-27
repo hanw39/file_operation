@@ -3,12 +3,12 @@ identity:
   name: file_operation
   label:
     en_US: file_operation
-    zh_Hans: file_operation
-    pt_BR: file_operation
+    zh_Hans: 文件操作
+    pt_BR: Operação de Arquivo
   description:
     en_US: Common file operations
-    zh_Hans: Common file operations
-    pt_BR: Common file operations
+    zh_Hans: 常见文件操作
+    pt_BR: Operações comuns de arquivo
   icon: icon.svg
 tools:
   - tools/file_hash.yaml

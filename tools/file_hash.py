@@ -24,7 +24,7 @@ class ResponseFormatter:
     STATUS_ERROR = 500        # 服务器错误
     
     @classmethod
-    def success(cls, data: Any, message: str = "操作成功") -> Dict[str, Any]:
+    def success(cls, data: Any, message: str = "Operation successful") -> Dict[str, Any]:
         """
         创建成功响应
         
@@ -292,7 +292,7 @@ class FileHashTool(Tool):
             if not HashAlgorithmFactory.is_algorithm_supported(algorithm):
                 yield self.create_json_message(
                     ResponseFormatter.error(
-                        message=f"不支持的哈希算法: {algorithm}",
+                        message=f"Unsupported hash algorithm: {algorithm}",
                         code=ResponseFormatter.STATUS_INVALID_PARAM,
                         error_type="algorithm_error",
                         details={"supported_algorithms": HashAlgorithmFactory.get_supported_algorithms()}
@@ -313,7 +313,7 @@ class FileHashTool(Tool):
             else:
                 yield self.create_json_message(
                     ResponseFormatter.error(
-                        message="未提供有效的文件",
+                        message="No valid file provided",
                         code=ResponseFormatter.STATUS_INVALID_PARAM,
                         error_type="invalid_file"
                     )
@@ -324,7 +324,7 @@ class FileHashTool(Tool):
             if not files_list:
                 yield self.create_json_message(
                     ResponseFormatter.error(
-                        message="文件列表为空",
+                        message="File list is empty",
                         code=ResponseFormatter.STATUS_INVALID_PARAM,
                         error_type="empty_file_list"
                     )
@@ -341,7 +341,7 @@ class FileHashTool(Tool):
                 yield self.create_json_message(
                     ResponseFormatter.progress(
                         progress=0,
-                        message=f"开始处理 {total_files} 个文件的哈希计算..."
+                        message=f"Starting hash calculation for {total_files} files..."
                     )
                 )
             
@@ -356,14 +356,14 @@ class FileHashTool(Tool):
                     
                     file_data = None
                     filename = self._get_attribute_safely(file_item, "name", 
-                               self._get_attribute_safely(file_item, "filename", "未命名文件"))
+                               self._get_attribute_safely(file_item, "filename", "Unnamed file"))
                     
                     if has_url:
                         # 从URL下载文件
                         yield self.create_json_message(
                             ResponseFormatter.progress(
                                 progress=processed_files * 90 // total_files,
-                                message=f"正在下载文件 {filename}..."
+                                message=f"Downloading file {filename}..."
                             )
                         )
                         file_content, success, error_msg = self._download_file_from_url(url)
@@ -507,7 +507,7 @@ class FileHashTool(Tool):
                     yield self.create_json_message(
                         ResponseFormatter.progress(
                             progress=progress_percent,
-                            message=f"已处理 {processed_files}/{total_files} 个文件..."
+                            message=f"Processed {processed_files}/{total_files} files..."
                         )
                     )
             
@@ -515,9 +515,9 @@ class FileHashTool(Tool):
             if total_files == 1:
                 # 单文件模式，保持与旧接口兼容
                 result_data = hash_results[0]
-                success_message = "哈希计算完成"
+                success_message = "Hash calculation completed"
                 if verification_status:
-                    success_message += f"，验证结果: {verification_status}"
+                    success_message += f", verification result: {verification_status}"
             else:
                 # 多文件模式，返回聚合结果
                 result_data = {
@@ -528,7 +528,7 @@ class FileHashTool(Tool):
                     "algorithm": algorithm,
                     "format": output_format
                 }
-                success_message = f"已完成 {total_files} 个文件的哈希计算"
+                success_message = f"Completed hash calculation for {total_files} files"
             
             # 发送成功响应
             yield self.create_json_message(
@@ -541,7 +541,7 @@ class FileHashTool(Tool):
         except Exception as e:
             yield self.create_json_message(
                 ResponseFormatter.error(
-                    message=f"计算文件哈希时出错: {str(e)}",
+                    message=f"Error calculating file hash: {str(e)}",
                     error_type="general_error",
                     details={
                         "exception_type": type(e).__name__,
@@ -568,7 +568,7 @@ class FileHashTool(Tool):
             if not hash_obj:
                 return {
                     "success": False,
-                    "error": f"不支持的哈希算法: {algorithm}",
+                    "error": f"Unsupported hash algorithm: {algorithm}",
                     "error_type": "algorithm_error"
                 }
             
@@ -586,7 +586,7 @@ class FileHashTool(Tool):
         except Exception as e:
             return {
                 "success": False,
-                "error": f"计算哈希值时出错: {str(e)}",
+                "error": f"Error calculating hash value: {str(e)}",
                 "error_type": "hash_calculation_error"
             }
     
@@ -609,7 +609,7 @@ class FileHashTool(Tool):
             if not hash_obj:
                 yield {
                     "success": False,
-                    "error": f"不支持的哈希算法: {algorithm}",
+                    "error": f"Unsupported hash algorithm: {algorithm}",
                     "error_type": "algorithm_error"
                 }
                 return
@@ -642,7 +642,7 @@ class FileHashTool(Tool):
         except Exception as e:
             yield {
                 "success": False,
-                "error": f"计算哈希值时出错: {str(e)}",
+                "error": f"Error calculating hash value: {str(e)}",
                 "error_type": "hash_calculation_error"
             }
     
